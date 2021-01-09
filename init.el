@@ -7,4 +7,14 @@
 
 ;; 加载基础配置(melpa源,字体,窗口,主题)
 (require 'init-basic)
-(require 'init-evil)
+(let (
+      (gc-cons-threshold most-positive-fixnum)
+      (gc-cons-percentage 0.6)
+      (file-name-handler-alist nil))
+
+  (with-temp-message ""
+    (require 'init-evil)
+    (require 'init-awesome-tray)
+    (require 'init-awesome-tab)
+    (require 'init-awesome-pair)
+    ))

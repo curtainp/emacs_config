@@ -1,0 +1,15 @@
+[submodule "extension/auto-save"]
+	path = extension/auto-save
+	url = https://github.com/manateelazycat/auto-save.git
+[submodule "extension/awesome-tray"]
+	path = extension/awesome-tray
+	url = https://github.com/manateelazycat/awesome-tray.git
+[submodule "extension/awesome-tab"]
+	path = extension/awesome-tab
+	url = https://github.com/manateelazycat/awesome-tab.git
+[submodule "extension/all-the-icons"]
+	path = extension/all-the-icons
+	url = https://github.com/domtronn/all-the-icons.el.git
+[submodule "extension/awesome-pair"]
+	path = extension/awesome-pair
+	url = https://github.com/manateelazycat/awesome-pair.git

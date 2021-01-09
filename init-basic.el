@@ -30,6 +30,7 @@
 (require 'moe-theme)
 (load-theme 'moe-dark t)
 
+;;MISC设置
 (setq
  ;; 当窗口变化时不要缩放frame
  frame-inhibit-implied-resize t
@@ -41,6 +42,13 @@
 (tool-bar-mode -1)      ;; 禁用工具栏
 (menu-bar-mode -1)      ;; 禁用菜单栏
 (scroll-bar-mode -1)    ;; 禁用滚动条
+(setq make-backup-files nil) ;;no auto-save
+(setq auto-save-default nil)
+;; 自动保存配置
+(require 'auto-save)
+(auto-save-enable)
+(setq auto-save-silent t)
+(setq auto-save-delete-trailing-whitespace t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-compacting-font-caches t) ;使用字体缓存，避免卡顿
 ;; 不显示 *scratch*
@@ -48,5 +56,8 @@
   (if (get-buffer "*scratch*")
       (kill-buffer "*scratch*")))
 (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+
+
+
 
 (provide 'init-basic)
