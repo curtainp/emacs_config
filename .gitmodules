@@ -13,3 +13,12 @@
 [submodule "extension/awesome-pair"]
 	path = extension/awesome-pair
 	url = https://github.com/manateelazycat/awesome-pair.git
+[submodule "extension/snails"]
+	path = extension/snails
+	url = https://github.com/manateelazycat/snails.git
+[submodule "extension/valign"]
+	path = extension/valign
+	url = https://github.com/casouri/valign.git
+[submodule "extension/hydra-posframe"]
+	path = extension/hydra-posframe
+	url = https://github.com/Ladicle/hydra-posframe.git
