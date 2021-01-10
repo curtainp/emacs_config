@@ -43,11 +43,4 @@
 									   (git-gutter-mode -1)
 									   (toggle-truncate-lines -1)))))
 
-;; 关闭鼠标功能
-(use-package disable-mouse
-  ;;:ensure t
-  :disabled
-  :hook (after-init . (lambda ()
-						(global-disable-mouse-mode))))
-
 (provide 'init-misc)

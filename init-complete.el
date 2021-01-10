@@ -1,23 +1,26 @@
 ;; company补全框架
 (use-package company
+  :ensure t
   :hook (prog-mode . company-mode)
-  :init (setq company-tooltip-align-annotations t company-idle-delay 0.1 company-echo-delay 0
-              company-minimum-prefix-length 2 company-require-match nil company-dabbrev-ignore-case
-              nil company-dabbrev-downcase nil company-show-numbers t)
-  :config
   :bind (:map company-active-map
               ("M-n" . nil)
               ("M-p" . nil)
               ("C-n" . #'company-select-next)
-              ("C-p" . #'company-select-previous))
+              ("C-p" . #'company-select-previous)))
 
 ;; tabnine 机器学习补全
 (use-package company-tabnine
-  :disabled
   :ensure t
-  :after 'company-mode
-  'company-tabnine-mode
-  :config (add-to-list 'company-backends #'company-tabnine))
+  :config
+  (add-to-list 'company-backends #'company-tabnine)
+  (defadvice company-echo-show (around disable-tabnine-upgrade-message activate)
+    (let ((company-message-func (ad-get-arg 0)))
+      (when (and company-message-func
+                 (stringp (funcall company-message-func)))
+        (unless (string-match "The free version of TabNine only indexes up to" (funcall company-message-func))
+          ad-do-it))))
+  (setq company-idle-delay 0)
+  (setq company-show-numbers t))
 
 ;; 美化company
 (use-package company-box

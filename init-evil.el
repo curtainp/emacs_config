@@ -4,7 +4,7 @@
 ;;(require 'evil)
 ;;(evil-mode 1)
 (use-package evil
-  :load-path "~/.emacs.d/elpa/evil"
+  ;;:load-path "~/.emacs.d/elpa/evil"
   :ensure t
   :hook (after-init . evil-mode))
 

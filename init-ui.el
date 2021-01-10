@@ -55,7 +55,6 @@
 ;;awesome-tray
 (use-package awesome-tray
   ;;:disabled
-  :ensure t
   :load-path "~/.emacs.d/cutain-emacs-conf/extension/awesome-tray"
   :hook (after-init . awesome-tray-mode)
   :config
@@ -70,7 +69,6 @@
 
 (use-package awesome-tab
   ;;:disabled
-  :ensure t
   :load-path "~/.emacs.d/curtain-emacs-conf/extension/awesome-tab"
   :hook (after-init . awesome-tab-mode)
   :bind
