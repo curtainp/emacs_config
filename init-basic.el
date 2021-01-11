@@ -2,7 +2,7 @@
 ;; refer manateelazycat emacs config
 
 ;; 字体设置
-(let ((emacs-font-size 14)
+(let ((emacs-font-size 15)
       emacs-font-name)
   (cond
    ((featurep 'cocoa)
@@ -40,11 +40,12 @@
 					  (modify-syntax-entry ?- "w")))
 
 ;;允许插入制表符"tab"
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
 (tool-bar-mode -1)      ;; 禁用工具栏
 (menu-bar-mode -1)      ;; 禁用菜单栏
 (scroll-bar-mode -1)    ;; 禁用滚动条
+(setq display-line-numbers-type 'relative)
 (setq use-file-dialog nil
       use-dialog-box nil
       inhibit-startup-screen t
@@ -124,15 +125,16 @@
         ad-do-it))
     ))
 
-(if (featurep 'cocoa)
-    (progn
-      (setq ns-use-native-fullscreen nil)
-      (setq ns-use-fullscreen-animation nil)
-      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-      (run-at-time "2sec" nil
-                   (lambda ()
-                     (toggle-frame-fullscreen)
-                     ))))
+;;(if (featurep 'cocoa)
+;;    (progn
+;;      (setq ns-use-native-fullscreen nil)
+;;      (setq ns-use-fullscreen-animation nil)
+;;      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+;;      (run-at-time "2sec" nil
+;;                   (lambda ()
+;;                     (toggle-frame-fullscreen)
+;;                     ))))
+(toggle-frame-fullscreen)
 ;; 高亮对应的括号
 (show-paren-mode 1)
 ;;awesome-pair
@@ -189,75 +191,6 @@
   (if (get-buffer "*scratch*")
       (kill-buffer "*scratch*")))
 (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
-
-
-;; 增强了搜索功能
-(use-package swiper
-  :ensure t
-  :bind
-  (("C-s" . swiper)
-   ("C-r" . swiper)
-   ("C-c C-r" . ivy-resume)
-   ("M-x" . counsel-M-x)
-   ("C-x C-f" . counsel-find-file))
-  :config
-  (setq counsel-describe-function-function #'helpful-callable)
-  (setq counsel-describe-variable-function #'helpful-variable)
-  (progn
-    (ivy-mode 1)
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-display-style 'fancy)
-    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
-
-;; 集成了很多非常有用的的功能
-(use-package counsel
-  :ensure t
-  :bind
-  (("C-x C-r" . 'counsel-recentf)
-   ("C-x d" . 'counsel-dired))
-  :config
-  ;; 默认的 rg 配置
-  ;; (setq counsel-rg-base-command "rg -M 240 --with-filename --no-heading --line-number --color never %s")
-  (setq counsel-rg-base-command (list "rg"
-									  "-M" "240"
-									  "--with-filename" "--no-heading" "--line-number" "--color"
-									  "never" "%s"
-									  "-g" "!package-config.org"
-									  "-g" "!site-lisp"
-									  "-g" "!doc"
-									  "-g" "!themes"
-                                      "-g" "!etc-cache"))
-  (setq counsel-fzf-cmd "fd -I --exclude={site-lisp,etc/snippets,themes,/eln-cache,/var,/elpa,/url,/auto-save-list,.cache,doc/} --type f | fzf -f \"%s\" --algo=v1")
-  ;; Integration with `projectile'
-  (with-eval-after-load 'projectile
-    (setq projectile-completion-system 'ivy)))
-
-
-(use-package snails
-  :defer 0
-  :load-path "~/.emacs.d/curtain-emacs-conf/extension/snails"
-  :config
-  (setq snails-default-backends '(snails-backend-current-buffer
-								  snails-backend-command
-								  snails-backend-bookmark
-								  snails-backend-buffer
-								  snails-backend-rg
-								  snails-backend-fd
-								  snails-backend-eaf-browser-history
-								  snails-backend-eaf-github-search
-								  snails-backend-google-suggestion)
-		snails-prefix-backends '(("*" '(snails-backend-current-buffer))
-								 (">" '(snails-backend-command))
-								 ("@" '(snails-backend-bookmark))
-								 ("#" '(snails-backend-buffer))
-								 ("$" '(snails-backend-rg))
-								 ("-" '(snails-backend-fd))
-								 ("=" '(snails-backend-eaf-browser-history))
-								 ("." '(snails-backend-eaf-github-search))
-								 ("," '(snails-backend-google-suggestion)))
-		snails-default-show-prefix-tips t
-		snails-backend-eaf-browser-history-limit 10))
-
 
 
 (provide 'init-basic)

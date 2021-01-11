@@ -1,7 +1,7 @@
 ;; Emacs对语言服务器支持的插件
 (use-package lsp-mode
   :ensure t
-  :commands (lsp)
+  ;;:commands (lsp)
   :hook ((c-mode c++-mode python-mode go-mode sh-mode) . lsp)
   :custom
   (lsp-idle-delay 200)

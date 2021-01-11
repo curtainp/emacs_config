@@ -24,6 +24,7 @@
 
 ;; 美化company
 (use-package company-box
+  :disabled
   :ensure t
   :hook (company-mode . company-box-mode))
 

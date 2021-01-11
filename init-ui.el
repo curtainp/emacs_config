@@ -1,5 +1,13 @@
 ;; UI 设置
 
+(use-package dashboard
+ :ensure t
+ :config
+ (dashboard-setup-startup-hook)
+ (setq dashboard-set-heading-icons t)
+ (setq dashboard-set-file-icons t)
+ (setq dashboard-banner-logo-title "Curtain Emacs"))
+
 ;;;###autoload
 (defun graphic-p ()
   "判断环境是否为GUI"
@@ -38,15 +46,9 @@
   (interactive)
   (ada/adjust-opacity nil -2))
 
-;;浮动窗口支持
-(use-package posframe
-  :defer 0
-  :ensure t
-  :custom
-  (posframe-mouse-banish nil))
-
 ;;缩进线
 (use-package highlight-indent-guides
+  :disabled
   :ensure t
   :hook (prog-mode . highlight-indent-guides-mode)
   :config

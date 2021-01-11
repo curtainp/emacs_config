@@ -16,6 +16,7 @@
     ;; 加载基础配置(melpa源,字体,窗口,主题)
     (require 'init-basic)
     (require 'init-ui)
+    (require 'init-ued)
     ;;(require 'init-keybind)
     ;;(require 'init-misc)
     (require 'init-complete)
