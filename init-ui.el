@@ -1,12 +1,16 @@
 ;; UI 设置
 
 (use-package dashboard
- :ensure t
- :config
- (dashboard-setup-startup-hook)
- (setq dashboard-set-heading-icons t)
- (setq dashboard-set-file-icons t)
- (setq dashboard-banner-logo-title "Curtain Emacs"))
+	:ensure t
+	:init
+	(setq dashboard-banner-logo-title "Curtain Emacs - Enjoy Programming & Writing"
+				dashboard-center-content t
+				dashboard-startup-banner "~/.emacs.d/logo.png"
+				dashboard-footer (format "Powered by Curtain, %s" (format-time-string "%Y")))
+	:config
+	(dashboard-setup-startup-hook)
+	(setq dashboard-set-heading-icons t)
+	(setq dashboard-set-file-icons t))
 
 ;;;###autoload
 (defun graphic-p ()
@@ -87,13 +91,14 @@
        (string-prefix-p "*epc" name)
        (string-prefix-p "*helm" name)
        (string-prefix-p "*Compile-Log*" name)
+       (string-prefix-p "*Warnings*" name)
+       (string-prefix-p "*Messages*" name)
        (string-prefix-p "*lsp" name)
        (string-prefix-p "flycheck" name)
        (string-prefix-p "*LSP" name)
        (string-prefix-p "*Youdao" name)
-       (string-prefix-p " *company-box" name)
        (string-prefix-p "*company-box" name)
-       (string-prefix-p " *Go-Tran" name)
+       (string-prefix-p "*Go-Tran" name)
        (string-prefix-p "*hydra-posframe" name)
        (string-prefix-p "*which-key*" name)
        (and (string-prefix-p "magit" name)

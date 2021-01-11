@@ -29,3 +29,16 @@
     (require 'init-cc)
     (require 'init-emacs-lisp)
     ))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+	 '(org-download yasnippet-snippets writeroom-mode vterm use-package undo-tree treemacs-projectile treemacs-persp treemacs-magit symbol-overlay quickrun python-black pdf-tools org-bullets moe-theme modern-cpp-font-lock major-mode-hydra lsp-ui lsp-treemacs lsp-pyright live-py-mode lispy ivy-posframe ivy-fuz highlight-indent-guides helpful figlet evil elisp-demos dashboard counsel-projectile company-tabnine company-box ccls all-the-icons-ivy-rich)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

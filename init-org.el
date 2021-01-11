@@ -46,22 +46,21 @@
   (setq org-capture-templates
    '(("t" "Task")
      ("tw" "Work Task" entry (file+headline org-agenda-file-task "Work")
-      "* [TODO] %^{Work Mainly Content} %t\n  %^g\n  %?" :clock-in t :clock-keep t)
+      "* [TODO] %^{Work Mainly Content} %t    %^g\n  %?")
      ("ts" "Work Study" entry (file+headline org-agenda-file-task "Study")
-      "* [STUDY] %^{Study for work} %t\n  %^g\n  %?" :clock-in t :clock-keep t)
+      "* [STUDY] %^{Study for work} %t    %^g\n  %?")
      ("i" "inspiration" entry (file+headline org-agenda-file-insp "Inspiration")
-      "* %^{What idea?} %U\n %^g\n  %?\n")
+      "* %^{What idea?} %U     %^g\n  %?\n")
      ("n" "Note" entry (file+headline org-agenda-file-note "Note")
-      "* %^{Note} %U\n %^g\n %?\n")))
+      "* %^{Note} %U      %^g\n %?\n")))
 
   ;; 设置org-babel支持运行的代码
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '( (python . t)
+   '((python . t)
       (shell . t)
       (emacs-lisp . t)
-      (C . t)
-      (C++ . t))))
+      (C . t))))
 
 ;; 美化org
 (use-package
@@ -70,7 +69,14 @@
   :after org
   :hook ('org-mode . 'org-bullets-mode)
   :custom
-  (org-bullets-bullet-list '("☰" "☷" "✿" "☭")))
+  (org-bullets-bullet-list '("☰" "☯" "✿" "☭")))
+
+(use-package org-download
+	:ensure t
+  :init
+  (setq org-download-image-dir "~/.emacs.d/gtd/images/")
+  :config
+  (add-hook 'dired-mode-hook 'org-download-enable))
 
 (use-package gkroam
   :disabled

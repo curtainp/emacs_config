@@ -32,20 +32,15 @@
  package-enable-at-startup nil
  package--init-file-ensured t)
 
-;;让'_'视作单词的一部分
-(add-hook 'after-change-major-mode-hook (lambda ()
-					  (modify-syntax-entry ?_ "w")))
-;;让'-'视作单词的一部分
-(add-hook 'after-change-major-mode-hook (lambda ()
-					  (modify-syntax-entry ?- "w")))
 
 ;;允许插入制表符"tab"
 (setq-default indent-tabs-mode t)
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 (tool-bar-mode -1)      ;; 禁用工具栏
 (menu-bar-mode -1)      ;; 禁用菜单栏
 (scroll-bar-mode -1)    ;; 禁用滚动条
 (setq display-line-numbers-type 'relative)
+(setq global-linum-mode t)
 (setq use-file-dialog nil
       use-dialog-box nil
       inhibit-startup-screen t
@@ -70,9 +65,6 @@
 (prefer-coding-system 'utf-8)
 (setq default-process-coding-system '(utf-8 . utf-8))
 
-;; Restore emacs session.
-(setq initial-buffer-choice t)
-(run-with-timer 1 nil #'(lambda () (bury-buffer)))
 ;; 增加长行处理性能
 (setq bidi-inhibit-bpa t)
 (setq-default bidi-paragraph-direction 'left-to-right)
@@ -81,28 +73,14 @@
 (setq read-process-output-max (* 1024 1024))
 (blink-cursor-mode -1)                  ;指针不闪动
 (transient-mark-mode 1)                 ;标记高亮
-(global-subword-mode 1)                 ;Word移动支持 FooBar 的格式
-(setq use-dialog-box nil)               ;never pop dialog
-(setq inhibit-startup-screen t)         ;inhibit start screen
-(setq initial-scratch-message "")       ;关闭启动空白buffer, 这个buffer会干扰session恢复
 (setq-default comment-style 'indent)    ;设定自动缩进的注释风格
 (setq ring-bell-function 'ignore)       ;关闭烦人的出错时的提示声
-(setq default-major-mode 'text-mode)    ;设置默认地主模式为TEXT模式
 (setq mouse-yank-at-point t)            ;粘贴于光标处,而不是鼠标指针处
 (setq x-select-enable-clipboard t)      ;支持emacs和外部程序的粘贴
 (setq split-width-threshold nil)        ;分屏的时候使用上下分屏
 (setq inhibit-compacting-font-caches t) ;使用字体缓存，避免卡顿
 (setq confirm-kill-processes nil)       ;退出自动杀掉进程
 (setq async-bytecomp-allowed-packages nil) ;避免magit报错
-(setq word-wrap-by-category t)             ;按照中文折行
-(setq profiler-report-cpu-line-format ;让 profiler-report 第一列宽一点
-      '((100 left)
-        (24 right ((19 right)
-                   (5 right)))))
-(setq profiler-report-memory-line-format
-      '((100 left)
-        (19 right ((14 right profiler-format-number)
-                   (5 right)))))
 
 (setq ad-redefinition-action 'accept)   ;不要烦人的 redefine warning
 (setq frame-resize-pixelwise t) ;设置缩放的模式,避免Mac平台最大化窗口以后右边和下边有空隙
@@ -192,5 +170,11 @@
       (kill-buffer "*scratch*")))
 (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
+;;让'_'视作单词的一部分
+(add-hook 'after-change-major-mode-hook (lambda ()
+					  (modify-syntax-entry ?_ "w")))
+;;让'-'视作单词的一部分
+(add-hook 'after-change-major-mode-hook (lambda ()
+					  (modify-syntax-entry ?- "w")))
 
 (provide 'init-basic)
