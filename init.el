@@ -18,13 +18,14 @@
     (require 'init-ui)
     (require 'init-ued)
     ;;(require 'init-keybind)
-    ;;(require 'init-misc)
+    (require 'init-misc)
     (require 'init-complete)
     (require 'init-prog)
     (require 'init-org)
     ;;(require 'init-ivy)
     ;;(require 'init-treemacs)
     (require 'init-lsp)
+		(require 'init-go)
     (require 'init-python)
     (require 'init-cc)
     (require 'init-emacs-lisp)
@@ -35,7 +36,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-	 '(org-download yasnippet-snippets writeroom-mode vterm use-package undo-tree treemacs-projectile treemacs-persp treemacs-magit symbol-overlay quickrun python-black pdf-tools org-bullets moe-theme modern-cpp-font-lock major-mode-hydra lsp-ui lsp-treemacs lsp-pyright live-py-mode lispy ivy-posframe ivy-fuz highlight-indent-guides helpful figlet evil elisp-demos dashboard counsel-projectile company-tabnine company-box ccls all-the-icons-ivy-rich)))
+	 '(go-impl go-fill-struct go-dlv yasnippet-snippets vterm use-package symbol-overlay quickrun python-black projectile posframe org-download org-bullets moe-theme modern-cpp-font-lock lsp-ui lsp-pyright live-py-mode lispy highlight-indent-guides helpful figlet exec-path-from-shell evil elisp-demos dashboard company-tabnine company-box ccls all-the-icons-ivy-rich)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

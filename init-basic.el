@@ -94,13 +94,14 @@
   (use-package exec-path-from-shell
     :ensure t
     :config
-    (setq exec-path-from-shell-check-startup-files nil)
-    (defvar cache-path-from-shell-loaded-p nil)
-    (defadvice exec-path-from-shell-initialize (around cache-path-from-shell-advice activate)
-      (if cache-path-from-shell-loaded-p
-          (message "all shell environment variables has loaded")
-        (setq cache-path-from-shell-loaded-p t)
-        ad-do-it))
+		(exec-path-from-shell-initialize)
+    ;; (setq exec-path-from-shell-check-startup-files nil)
+    ;; (defvar cache-path-from-shell-loaded-p nil)
+    ;; (defadvice exec-path-from-shell-initialize (around cache-path-from-shell-advice activate)
+    ;;   (if cache-path-from-shell-loaded-p
+    ;;       (message "all shell environment variables has loaded")
+    ;;     (setq cache-path-from-shell-loaded-p t)
+    ;;     ad-do-it))
     ))
 
 ;;(if (featurep 'cocoa)
