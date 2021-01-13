@@ -15,7 +15,7 @@
   (setq org-todo-keyword-faces '(("[STUDY]" . (:foreground "white" :background "#2ECC71" :weight bold))
                                  ("[TODO]" . (:foreground "white" :background "#F1C40F" :weight bold))
                                  ("[WAIT]" . (:foreground "white" :background "#5498DB" :weight bold))
-                                 ("[DONE]" . (:foreground "black" :background "snow " :weight bold))
+                                 ("[DONE]" . (:foreground "white" :background "#782209" :weight bold))
                                  ("[CACEL]" . (:foreground "white" :background "#566573" :weight bold))
                                  ("[BUG]" . (:foreground "white" :background "#E74C3C" :weight bold))
                                  ("[NEW]" . (:foreground "white" :background "#D35400" :weight bold))

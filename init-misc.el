@@ -5,7 +5,6 @@
   :ensure t
 	:config (setq vterm-shell "zsh"))
 
-
 (use-package pdf-tools
 	:disabled
 	:ensure t

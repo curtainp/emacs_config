@@ -34,7 +34,7 @@
   :hook (lsp-mode . lsp-ui-mode)
   :config
   ;; sideline
-  (setq lsp-ui-sideline-show-diagnostics t
+  (setq ;; lsp-ui-sideline-show-diagnostics t
         lsp-ui-sideline-show-hover t
         lsp-ui-sideline-show-code-actions nil
         lsp-ui-sideline-update-mode 'line
@@ -46,7 +46,7 @@
   ;; doc
   (setq lsp-ui-doc-enable t
         ;; 文档显示的位置
-        lsp-ui-doc-position 'top
+        ;; lsp-ui-doc-position 'top
         ;; 显示文档的延迟
         lsp-ui-doc-delay 2))
 
