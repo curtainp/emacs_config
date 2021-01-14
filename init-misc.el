@@ -24,10 +24,6 @@
   ;; HACK: keep the diff window
   (with-no-warnings (make-variable-buffer-local 'undo-tree-visualizer-diff)
                     (setq-default undo-tree-visualizer-diff t))
-;; 项目管理
-(use-package
-  projectile
-  :ensure t)
 
 ;; ASCII艺术字
 (use-package figlet

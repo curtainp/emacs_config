@@ -165,6 +165,20 @@
               ("\"" . #'awesome-pair-double-quote)
               ))
 
+;; 项目管理
+(use-package projectile
+  :ensure t)
+
+(use-package yasnippet
+  :ensure t
+  :hook (after-init . yas-global-mode)
+  :config
+  (setq yas-snippet-dirs
+      '("~/.emacs.d/curtain-emacs-conf/snippets/"                 ;; personal snippets
+        ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+        ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+        )))
+
 ;; 不显示 *scratch*
 (defun remove-scratch-buffer ()
   (if (get-buffer "*scratch*")

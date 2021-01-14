@@ -28,6 +28,10 @@
   :config
   (setq posframe-mouse-banish nil))
 
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 ;; 集成了很多非常有用的的功能
 (use-package counsel
   :ensure t
@@ -79,4 +83,3 @@
 		snails-backend-eaf-browser-history-limit 10))
 
 (provide 'init-ued)
-

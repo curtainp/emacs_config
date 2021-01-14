@@ -41,7 +41,7 @@
         '(("orgfiles"
            ;; ; Sources and destinations for files.
            :base-directory "~/workspace/docs/site/org/"  ;; local dir
-           :publishing-directory "~/workspace/docs/site/public/" ;; :publishing-directory
+           :publishing-directory "~/workspace/docs/site/docs/" ;; :publishing-directory
            ;; :preparation-function
            ;; :complete-function
 
@@ -156,35 +156,35 @@
           ("jscss"
            :base-directory "~/workspace/docs/site/dist/"
            :base-extension "js\\|css"
-           :publishing-directory "~/workspace/docs/site/public/dist/"
+           :publishing-directory "~/workspace/docs/site/docs/dist/"
            :recursive t
            :publishing-function org-publish-attachment
            )
           ("conf"
            :base-directory "~/workspace/docs/site/"
            :base-extension "js"
-           :publishing-directory "~/workspace/docs/site/public/"
+           :publishing-directory "~/workspace/docs/site/docs/"
            :recursive nil
            :publishing-function org-publish-attachment
            )
           ("images"
            :base-directory "~/workspace/docs/site/images/"
            :base-extension "jpg\\|gif\\|png\\|svg\\|gif"
-           :publishing-directory "~/workspace/docs/site/public/images/"
+           :publishing-directory "~/workspace/docs/site/docs/images/"
            :recursive t
            :publishing-function org-publish-attachment
            )
           ("assets"
            :base-directory "~/workspace/docs/site/assets/"
            :base-extension "mp3"
-           :publishing-directory "~/workspace/docs/site/public/assets/"
+           :publishing-directory "~/workspace/docs/site/docs/assets/"
            :recursive t
            :publishing-function org-publish-attachment
            )
           ("webfonts"
            :base-directory "~/workspace/docs/site/webfonts/"
            :base-extension "eot\\|svg\\|ttf\\|woff\\|woff2"
-           :publishing-directory "~/workspace/docs/site/public/webfonts/"
+           :publishing-directory "~/workspace/docs/site/docs/webfonts/"
            :recursive t
            :publishing-function org-publish-attachment
            )
@@ -218,7 +218,7 @@
   (interactive)
   (when (yes-or-no-p "Really delete current org and the relative html?")
 
-    (let ((fileurl (concat "~/workspace/docs/site/public/" (file-name-base (buffer-name)) ".html")))
+    (let ((fileurl (concat "~/workspace/docs/site/docs/" (file-name-base (buffer-name)) ".html")))
       (if (file-exists-p fileurl)
           (delete-file fileurl))
       (delete-file (buffer-file-name))
@@ -230,7 +230,7 @@
   (interactive)
   (when (yes-or-no-p "Really delete the relative html?")
 
-    (let ((fileurl (concat "~/workspace/docs/site/public/" (file-name-base (buffer-name)) ".html")))
+    (let ((fileurl (concat "~/workspace/docs/site/docs/" (file-name-base (buffer-name)) ".html")))
       (if (file-exists-p fileurl)
           (progn
             (delete-file fileurl)
@@ -255,7 +255,7 @@
 (use-package simple-httpd
   :ensure t
   :config
-  (setq httpd-root "~/workspace/docs/site/public"))
+  (setq httpd-root "~/workspace/docs/site/docs"))
 
 (defun preview-current-buffer-in-browser ()
   "Open current buffer as html."
