@@ -12,27 +12,28 @@
 (use-package company-tabnine
   :ensure t
   :config
-  (add-to-list 'company-backends #'company-tabnine)
+	(setq company-backends
+				'(
+					(company-tabnine company-dabbrev company-keywords company-files company-capf)))
   (defadvice company-echo-show (around disable-tabnine-upgrade-message activate)
     (let ((company-message-func (ad-get-arg 0)))
       (when (and company-message-func
                  (stringp (funcall company-message-func)))
         (unless (string-match "The free version of TabNine only indexes up to" (funcall company-message-func))
           ad-do-it))))
+	;; add snippets support for all backends
+	(defvar company-mode/enable-yas t
+		"Enable yasnippet for all backends.")
+	(defun company-mode/backend-with-yas (backend)
+		(if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+				backend
+			(append (if (consp backend) backend (list backend))
+							'(:with company-yasnippet))))
+	(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
   (setq company-idle-delay 0)
-  (setq company-show-numbers t))
-
-;; 美化company
-(use-package company-box
-  :disabled
-  :ensure t
-  :hook (company-mode . company-box-mode))
-
-;; 代码片段
-(use-package yasnippet
-  :ensure t
-  :config
-  (setq yas-snippet-dirs '("~/.emacs.d/curtain-emacs-conf/snippets")))
+  (setq company-show-numbers nil)
+	(setq company-dabbrev-downcase nil)
+	(setq company-dabbrev-ignore-case t))
 
 
 (provide 'init-complete)

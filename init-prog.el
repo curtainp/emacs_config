@@ -4,30 +4,25 @@
   :ensure t
   :after yasnippet)
 
-;; 编译运行当前文件
-(use-package
-  quickrun
-  :ensure t
-  :commands(quickrun)
-  ;;:bind (:map leader-key
-  ;;            ("c r" . #'quickrun))
-  :init (setq quickrun-timeout-seconds nil)
-  (setq quickrun-focus-p nil)
-  (setq quickrun-input-file-extension nil)
-  :config
-  (quickrun-add-command "python3"
-    '((:command .
-                "python3")
-      (:exec .
-             "%c %s")
-      (:tempfile .
-                 nil))
-    :default "python")
-  (quickrun-add-command "c++/c2a"
-	'((:command . "g++")
-      (:exec    . ("%c -std=c++2a %o -o %e %s"
-				   "%e %a"))
-      (:remove  . ("%e")))
-	:default "c++"))
+(use-package citre
+	:defer t
+	:init
+	(require 'citre-config)
+	(global-set-key (kbd "C-x 7") 'citre-jump)
+  (global-set-key (kbd "C-x 8") 'citre-jump-back)
+  (global-set-key (kbd "C-x 9") 'citre-ace-peek)
+  (global-set-key (kbd "C-x 0") 'citre-update-this-tags-file)
+	:config
+	(setq
+	 citre-default-create-tags-file-location 'global-cache
+	 citre-use-project-root-when-creating-tags t
+	 citre-prompt-language-for-ctags-command t)
+	(defun citre-jump+ ()
+		(interactive)
+		(condition-case _
+				(citre-jump)
+				(error (call-interactively #'xref-find-definitions))))
+	)
+
 
 (provide 'init-prog)

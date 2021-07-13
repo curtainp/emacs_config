@@ -1,22 +1,19 @@
 ;; UI 设置
+(use-package all-the-icons
+	:ensure t)
 
 (use-package dashboard
 	:ensure t
 	:init
 	(setq dashboard-banner-logo-title "Curtain Emacs - Enjoy Programming & Writing"
 				dashboard-center-content t
-				dashboard-startup-banner "~/.emacs.d/logo.png"
+				dashboard-startup-banner "~/.config/emacs/logo.png"
 				dashboard-footer (format "Powered by Curtain, %s" (format-time-string "%Y")))
 	:config
 	(dashboard-setup-startup-hook)
 	(setq dashboard-set-heading-icons t)
 	(setq dashboard-set-file-icons t))
 
-;;;###autoload
-(defun graphic-p ()
-  "判断环境是否为GUI"
-  (if (display-graphic-p)
-      t))
 
 ;;;###autoload
 (defun ada/toggle-transparency ()
@@ -50,32 +47,26 @@
   (interactive)
   (ada/adjust-opacity nil -2))
 
-;;缩进线
-(use-package highlight-indent-guides
-  :disabled
-  :ensure t
-  :hook (prog-mode . highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'bitmap))
 
 ;;awesome-tray
 (use-package awesome-tray
   ;;:disabled
-  :load-path "~/.emacs.d/cutain-emacs-conf/extension/awesome-tray"
+  :load-path (lambda () (concat user-emacs-directory "lisp/extension/awesome-tray"))
   :hook (after-init . awesome-tray-mode)
   :config
   (setq awesome-tray-active-modules '("location" "parent-dir" "buffer-name" "awesome-tab" "evil" "git")))
 
 ;; valign表格对齐
 (use-package valign
-  :load-path "~/.emacs.d/curtain-emacs-conf/extension/valign"
+  ;;:disabled
+  :load-path (lambda () (concat user-emacs-directory "lisp/extension/valign"))
   :hook ((org-mode markdown-mode) . valign-mode)
   :config
   (setq valign-fancy-bar nil))
 
 (use-package awesome-tab
   ;;:disabled
-  :load-path "~/.emacs.d/curtain-emacs-conf/extension/awesome-tab"
+  :load-path "~/.config/emacs/lisp/extension/awesome-tab"
   :hook (after-init . awesome-tab-mode)
   :bind
   (("C-c h" . awesome-tab-backward-tab)
@@ -104,5 +95,53 @@
        (and (string-prefix-p "magit" name)
             (not (file-name-extension name)))
        ))))
+
+;; line number
+(setq line-number-display-limit large-file-warning-threshold)
+(setq line-number-display-limit-width 1000)
+
+(dolist (hook (list
+               'c-mode-common-hook
+               'c-mode-hook
+               'emacs-lisp-mode-hook
+               'lisp-interaction-mode-hook
+               'lisp-mode-hook
+               'java-mode-hook
+               'asm-mode-hook
+               'haskell-mode-hook
+               'rcirc-mode-hook
+               'erc-mode-hook
+               'sh-mode-hook
+               'makefile-gmake-mode-hook
+               'python-mode-hook
+               'js-mode-hook
+               'html-mode-hook
+               'css-mode-hook
+               'apt-utils-mode-hook
+               'tuareg-mode-hook
+               'go-mode-hook
+               'coffee-mode-hook
+               'qml-mode-hook
+               'markdown-mode-hook
+               'slime-repl-mode-hook
+               'package-menu-mode-hook
+               'cmake-mode-hook
+               'php-mode-hook
+               'web-mode-hook
+               'coffee-mode-hook
+               'sws-mode-hook
+               'jade-mode-hook
+               'vala-mode-hook
+               'rust-mode-hook
+               'ruby-mode-hook
+               'qmake-mode-hook
+               'lua-mode-hook
+               'swift-mode-hook
+               'llvm-mode-hook
+               'conf-toml-mode-hook
+               'nxml-mode-hook
+               'nim-mode-hook
+               ))
+  (add-hook hook (lambda () (display-line-numbers-mode))))
 
 (provide 'init-ui)

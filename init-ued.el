@@ -51,35 +51,6 @@
 									  "-g" "!themes"
                                       "-g" "!etc-cache"))
   (setq counsel-fzf-cmd "fd -I --exclude={site-lisp,etc/snippets,themes,/eln-cache,/var,/elpa,/url,/auto-save-list,.cache,doc/} --type f | fzf -f \"%s\" --algo=v1")
-  ;; Integration with `projectile'
-  (with-eval-after-load 'projectile
-    (setq projectile-completion-system 'ivy)))
-
-
-(use-package snails
-  :disabled
-  :defer 0
-  :load-path "~/.emacs.d/curtain-emacs-conf/extension/snails"
-  :config
-  (setq snails-default-backends '(snails-backend-current-buffer
-								  snails-backend-command
-								  snails-backend-bookmark
-								  snails-backend-buffer
-								  snails-backend-rg
-								  snails-backend-fd
-								  snails-backend-eaf-browser-history
-								  snails-backend-eaf-github-search
-								  snails-backend-google-suggestion)
-		snails-prefix-backends '(("*" '(snails-backend-current-buffer))
-								 (">" '(snails-backend-command))
-								 ("@" '(snails-backend-bookmark))
-								 ("#" '(snails-backend-buffer))
-								 ("$" '(snails-backend-rg))
-								 ("-" '(snails-backend-fd))
-								 ("=" '(snails-backend-eaf-browser-history))
-								 ("." '(snails-backend-eaf-github-search))
-								 ("," '(snails-backend-google-suggestion)))
-		snails-default-show-prefix-tips t
-		snails-backend-eaf-browser-history-limit 10))
+  )
 
 (provide 'init-ued)

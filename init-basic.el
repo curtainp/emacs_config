@@ -2,12 +2,12 @@
 ;; refer manateelazycat emacs config
 
 ;; 字体设置
-(let ((emacs-font-size 15)
+(let ((emacs-font-size 16)
       emacs-font-name)
   (cond
-   ((featurep 'cocoa)
-    (setq emacs-font-name "Monaco"))
-   ((string-equal system-type "gnu/linux")
+   ((or (featurep 'cocoa) (string-equal system-type "gnu/linux"))
+    (setq emacs-font-name "Operator Mono Lig"))
+   ((string-equal system-type "windows")
     (setq emacs-font-name "WenQuanYi Micro Hei Mono")))
   (when (display-grayscale-p)
     (set-frame-font (format "%s-%s" (eval emacs-font-name) (eval emacs-font-size)))
@@ -92,16 +92,18 @@
 ;;macos 下exec-path修复
 (when (featurep 'cocoa)
   (use-package exec-path-from-shell
+		;; :disabled
     :ensure t
+		:init
+		(setq exec-path-from-shell-arguments '("-l"))
+    (defvar cache-path-from-shell-loaded-p nil)
+    (defadvice exec-path-from-shell-initialize (around cache-path-from-shell-advice activate)
+      (if cache-path-from-shell-loaded-p
+          (message "all shell environment variables has loaded")
+        (setq cache-path-from-shell-loaded-p t)
+        ad-do-it))
     :config
 		(exec-path-from-shell-initialize)
-    ;; (setq exec-path-from-shell-check-startup-files nil)
-    ;; (defvar cache-path-from-shell-loaded-p nil)
-    ;; (defadvice exec-path-from-shell-initialize (around cache-path-from-shell-advice activate)
-    ;;   (if cache-path-from-shell-loaded-p
-    ;;       (message "all shell environment variables has loaded")
-    ;;     (setq cache-path-from-shell-loaded-p t)
-    ;;     ad-do-it))
     ))
 
 ;;(if (featurep 'cocoa)
@@ -118,7 +120,7 @@
 (show-paren-mode 1)
 ;;awesome-pair
 (use-package awesome-pair
-  :load-path "~/.emacs.d/curtain-emacs-conf/extension/awesome-pair"
+  :load-path (lambda () (concat user-emacs-directory "extension/awesome-pair"))
   :config
   (dolist (hook (list
                'c-mode-common-hook
@@ -165,19 +167,18 @@
               ("\"" . #'awesome-pair-double-quote)
               ))
 
-;; 项目管理
-(use-package projectile
-  :ensure t)
 
 (use-package yasnippet
   :ensure t
   :hook (after-init . yas-global-mode)
   :config
   (setq yas-snippet-dirs
-      '("~/.emacs.d/curtain-emacs-conf/snippets/"                 ;; personal snippets
-        ;; "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-        ;; "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-        )))
+				'("~/.config/emacs/snippets/"))
+	(dolist (hook (list
+                 'term-mode-hook
+                 ))
+		(add-hook hook #'(lambda () (yas-minor-mode -1))))
+	)
 
 ;; 不显示 *scratch*
 (defun remove-scratch-buffer ()

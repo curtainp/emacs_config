@@ -4,11 +4,6 @@
   :ensure t)
 
 (use-package
-  hydra-posframe
-  :load-path "~/.emacs.d/curtain-emacs-conf/extension/hydra-posframe"
-  :hook (after-init . hydra-posframe-mode))
-
-(use-package
   major-mode-hydra
   :defer 0
   :ensure t
